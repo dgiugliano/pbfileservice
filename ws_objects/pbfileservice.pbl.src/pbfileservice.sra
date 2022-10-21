@@ -21,14 +21,16 @@ string themename = "Do Not Use Themes"
 boolean nativepdfvalid = false
 boolean nativepdfincludecustomfont = false
 string nativepdfappname = ""
-long richtextedittype = 2
-long richtexteditx64type = 3
-long richtexteditversion = 1
+long richtextedittype = 5
+long richtexteditx64type = 5
+long richtexteditversion = 3
 string richtexteditkey = ""
 string appicon = "icono.ico"
 string appruntimeversion = "22.0.0.1878"
 boolean manualsession = false
 boolean unsupportedapierror = false
+boolean bignoreservercertificate = false
+uint ignoreservercertificate = 0
 end type
 global pbfileservice pbfileservice
 
@@ -58,10 +60,10 @@ event open;String ls_Path
 unsignedlong lul_handle
 
 ls_Path = space(1024)
-lul_handle = Handle(GetApplication())
-GetModuleFilenameW(lul_handle, ls_Path, 1024)
+SetNull(lul_handle)
+GetModuleFilenameW(lul_handle, ls_Path, len(ls_Path))
 
-if right(UPPER(ls_path), 9)="PB210.EXE" then
+if right(UPPER(ls_path), 7)="220.EXE" or right(UPPER(ls_path), 7)="X64.EXE" then
 	ls_path="C:\projecto pw2021\Blog\pbfileservice\pbfileservice.exe"
 end if
 
