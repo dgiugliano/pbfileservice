@@ -35,10 +35,8 @@ end type
 global pbfileservice pbfileservice
 
 type prototypes
-//Funcion para tomar el directorio de la aplicacion
-FUNCTION int GetModuleFileNameW(ulong hinstModule, REF string lpszPath,  ulong cchPath) LIBRARY "kernel32"
-end prototypes
 
+end prototypes
 on pbfileservice.create
 appname="pbfileservice"
 message=create message
@@ -56,18 +54,7 @@ destroy(error)
 destroy(message)
 end on
 
-event open;String ls_Path
-unsignedlong lul_handle
-
-ls_Path = space(1024)
-SetNull(lul_handle)
-GetModuleFilenameW(lul_handle, ls_Path, len(ls_Path))
-
-if right(UPPER(ls_path), 7)="220.EXE" or right(UPPER(ls_path), 7)="X64.EXE" then
-	ls_path="C:\projecto pw2021\Blog\pbfileservice\pbfileservice.exe"
-end if
-
-gs_dir=left(ls_path, len(ls_path) - 17)
+event open;gs_dir= GetCurrentDirectory() +"\"
 
 Open(w_main)
 end event
