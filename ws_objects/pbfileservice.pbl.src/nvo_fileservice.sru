@@ -55,6 +55,8 @@ public function string of_changeextension(string as_fileinput,string as_extensio
 public function string of_getdirectoryname(string as_fileinput)
 public function boolean of_endsindirectoryseparator(string as_fileinput)
 public function boolean of_filerename(string as_fileinput,string as_newfile)
+public subroutine  of_copydirectory(string as_sourcedir,string as_destinationdir,boolean abln_recursive)
+public subroutine  of_copydirectory(string as_sourcedir,string as_destinationdir,boolean abln_recursive,string as_searchpattern)
 end prototypes
 
 event ue_error ( );
@@ -496,6 +498,75 @@ Catch(runtimeerror re_error)
 	Return lbln_result
 End Try
 end function
+
+public subroutine  of_copydirectory(string as_sourcedir,string as_destinationdir,boolean abln_recursive);
+//*-----------------------------------------------------------------*/
+//*  .NET function : CopyDirectory
+//*   Argument:
+//*              String as_sourcedir
+//*              String as_destinationdir
+//*              Boolean abln_recursive
+//*   Return : (None)
+//*-----------------------------------------------------------------*/
+/* .NET  function name */
+String ls_function
+
+/* Set the dotnet function name */
+ls_function = "CopyDirectory"
+
+Try
+	/* Create .NET object */
+	If Not This.of_createOnDemand( ) Then
+		Return 
+	End If
+
+	/* Trigger the dotnet function */
+	This.copydirectory(as_sourcedir,as_destinationdir,abln_recursive)
+Catch(runtimeerror re_error)
+
+	If This.ib_CrashOnException Then Throw re_error
+
+	/*   Handle .NET error */
+	This.of_SetDotNETError(ls_function, re_error.text)
+	This.of_SignalError( )
+
+End Try
+end subroutine
+
+public subroutine  of_copydirectory(string as_sourcedir,string as_destinationdir,boolean abln_recursive,string as_searchpattern);
+//*-----------------------------------------------------------------*/
+//*  .NET function : CopyDirectory
+//*   Argument:
+//*              String as_sourcedir
+//*              String as_destinationdir
+//*              Boolean abln_recursive
+//*              String as_searchpattern
+//*   Return : (None)
+//*-----------------------------------------------------------------*/
+/* .NET  function name */
+String ls_function
+
+/* Set the dotnet function name */
+ls_function = "CopyDirectory"
+
+Try
+	/* Create .NET object */
+	If Not This.of_createOnDemand( ) Then
+		Return 
+	End If
+
+	/* Trigger the dotnet function */
+	This.copydirectory(as_sourcedir,as_destinationdir,abln_recursive,as_searchpattern)
+Catch(runtimeerror re_error)
+
+	If This.ib_CrashOnException Then Throw re_error
+
+	/*   Handle .NET error */
+	This.of_SetDotNETError(ls_function, re_error.text)
+	This.of_SignalError( )
+
+End Try
+end subroutine
 
 on nvo_fileservice.create
 call super::create
