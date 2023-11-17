@@ -6,9 +6,9 @@ type cbx_recursive from checkbox within w_main
 end type
 type cb_copydirectory from commandbutton within w_main
 end type
-type cb_8 from commandbutton within w_main
+type cb_destinationdir from commandbutton within w_main
 end type
-type cb_7 from commandbutton within w_main
+type cb_sourcedir from commandbutton within w_main
 end type
 type st_destinationdir from statictext within w_main
 end type
@@ -64,8 +64,8 @@ string icon = "AppIcon!"
 boolean center = true
 cbx_recursive cbx_recursive
 cb_copydirectory cb_copydirectory
-cb_8 cb_8
-cb_7 cb_7
+cb_destinationdir cb_destinationdir
+cb_sourcedir cb_sourcedir
 st_destinationdir st_destinationdir
 st_sourcedir st_sourcedir
 sle_destinationdir sle_destinationdir
@@ -123,8 +123,21 @@ ast_patform.text=ls_platform
 
 end subroutine
 
-public function integer wf_getfolder (string as_dlgtitle, ref string as_folder);// and doesn't have the option to create a new folder. GetFolderDialog() does. It is
-// based on WinAPI IFileOpenDialog.
+public function integer wf_getfolder (string as_dlgtitle, ref string as_folder);/*
+Copyright 2020 Davros
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 
 Constant long MAX_PATH = 260
 Constant long GFD_OK = 0
@@ -156,8 +169,8 @@ end function
 on w_main.create
 this.cbx_recursive=create cbx_recursive
 this.cb_copydirectory=create cb_copydirectory
-this.cb_8=create cb_8
-this.cb_7=create cb_7
+this.cb_destinationdir=create cb_destinationdir
+this.cb_sourcedir=create cb_sourcedir
 this.st_destinationdir=create st_destinationdir
 this.st_sourcedir=create st_sourcedir
 this.sle_destinationdir=create sle_destinationdir
@@ -180,8 +193,8 @@ this.cb_getfilenamewithoutextension=create cb_getfilenamewithoutextension
 this.r_2=create r_2
 this.Control[]={this.cbx_recursive,&
 this.cb_copydirectory,&
-this.cb_8,&
-this.cb_7,&
+this.cb_destinationdir,&
+this.cb_sourcedir,&
 this.st_destinationdir,&
 this.st_sourcedir,&
 this.sle_destinationdir,&
@@ -207,8 +220,8 @@ end on
 on w_main.destroy
 destroy(this.cbx_recursive)
 destroy(this.cb_copydirectory)
-destroy(this.cb_8)
-destroy(this.cb_7)
+destroy(this.cb_destinationdir)
+destroy(this.cb_sourcedir)
 destroy(this.st_destinationdir)
 destroy(this.st_sourcedir)
 destroy(this.sle_destinationdir)
@@ -306,7 +319,7 @@ End If
 
 end event
 
-type cb_8 from commandbutton within w_main
+type cb_destinationdir from commandbutton within w_main
 integer x = 1989
 integer y = 1252
 integer width = 174
@@ -335,7 +348,7 @@ End If
 
 end event
 
-type cb_7 from commandbutton within w_main
+type cb_sourcedir from commandbutton within w_main
 integer x = 1989
 integer y = 1120
 integer width = 174
